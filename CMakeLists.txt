@@ -18,3 +18,4 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_subdirectory(catalog/dinamyc-arrays)
+add_subdirectory(catalog/string-manipulation)
