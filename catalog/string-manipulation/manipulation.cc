@@ -13,4 +13,23 @@ char toUpperCase (char ch) {
   else
     return ch;
 }
+
+std::vector<std::string> split(const std::string& s, char ch) {
+  std::vector<std::string> res;
+  if (s.empty()) return res;
+
+  size_t start = 0;
+  size_t pos;
+
+  while ((pos = s.find(ch, start)) != std::string::npos) {
+    res.push_back(s.substr(start, pos - start));
+    start = pos + 1;
+  }
+
+  // Always push the last token (even if empty)
+  res.push_back(s.substr(start));
+
+  return res;
+}
+
 }  // stringmanipulation

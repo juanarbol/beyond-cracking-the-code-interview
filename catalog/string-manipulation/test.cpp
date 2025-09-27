@@ -38,3 +38,57 @@ TEST(ToUpperCaseTest, NonAlphabeticCharacters) {
   EXPECT_EQ(toUpperCase('!'), '!');  // symbols should be unchanged
   EXPECT_EQ(toUpperCase(' '), ' ');  // spaces should be unchanged
 }
+
+TEST(SplitTest, EmptyString) {
+    std::string input = "";
+    auto result = split(input, ',');
+    EXPECT_TRUE(result.empty());     // []
+}
+
+TEST(SplitTest, NoDelimiter) {
+    std::string input = "hello";
+    auto result = split(input, ',');
+    ASSERT_EQ(result.size(), 1u);
+    EXPECT_EQ(result[0], "hello");  // ["hello"]
+}
+
+TEST(SplitTest, SingleDelimiter) {
+    std::string input = "a,b";
+    auto result = split(input, ',');
+    ASSERT_EQ(result.size(), 2u);
+    EXPECT_EQ(result[0], "a");
+    EXPECT_EQ(result[1], "b");      // ["a","b"]
+}
+
+TEST(SplitTest, MultipleDelimiters) {
+    std::string input = "one,two,three";
+    auto result = split(input, ',');
+    ASSERT_EQ(result.size(), 3u);
+    EXPECT_EQ(result[0], "one");
+    EXPECT_EQ(result[1], "two");
+    EXPECT_EQ(result[2], "three");  // ["one","two","three"]
+}
+
+TEST(SplitTest, LeadingDelimiter) {
+    std::string input = ",start";
+    auto result = split(input, ',');
+    ASSERT_EQ(result.size(), 2u);
+    EXPECT_EQ(result[0], "");       // ["", "start"]
+    EXPECT_EQ(result[1], "start");
+}
+
+TEST(SplitTest, TrailingDelimiter) {
+    std::string input = "end,";
+    auto result = split(input, ',');
+    ASSERT_EQ(result.size(), 2u);
+    EXPECT_EQ(result[0], "end");
+    EXPECT_EQ(result[1], "");       // ["end", ""]
+}
+
+TEST(SplitTest, TrailingDelimiter2) {
+    std::string input = "end,,";
+    auto result = split(input, ',');
+    ASSERT_EQ(result.size(), 3u);
+    EXPECT_EQ(result[0], "end");
+    EXPECT_EQ(result[1], "");       // ["end", "", ""]
+}
