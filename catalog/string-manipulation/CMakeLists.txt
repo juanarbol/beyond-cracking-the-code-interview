@@ -1,7 +1,7 @@
 add_library(stringmanipulation manipulation.cc)
 target_include_directories(stringmanipulation PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_executable(stringmanipulationtest test.cpp)
+add_executable(stringmanipulationtest test.cc)
 target_link_libraries(stringmanipulationtest
   stringmanipulation
   GTest::gtest_main

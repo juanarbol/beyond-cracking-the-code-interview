@@ -59,11 +59,14 @@ int index_of(const std::string& s, const std::string& t) {
   if (t.size() > s.size()) return -1;
 
   size_t start = 0;
+  // O(n - m + 1) n = s.size(); m = t.size(); + 1 worst case
   while (start + t.size() <= s.size() ) {
+    // O(m) = copies m chars
     std::string res = s.substr(start, t.size());
     if (res == t) return static_cast<int>(start);
     start += 1;
   }
+  // O((n - m + 1) * m) -> O(n * m);
 
   return -1;
 }

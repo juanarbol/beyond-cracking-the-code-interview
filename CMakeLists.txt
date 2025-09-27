@@ -19,3 +19,4 @@ enable_testing()
 
 add_subdirectory(catalog/dinamyc-arrays)
 add_subdirectory(catalog/string-manipulation)
+add_subdirectory(catalog/two-pointers)
