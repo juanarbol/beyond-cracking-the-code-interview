@@ -54,4 +54,18 @@ std::string join(const std::vector<std::string>& parts, char ch) {
   return res;
 }
 
+int index_of(const std::string& s, const std::string& t) {
+  if (t.empty()) return 0;
+  if (t.size() > s.size()) return -1;
+
+  size_t start = 0;
+  while (start + t.size() <= s.size() ) {
+    std::string res = s.substr(start, t.size());
+    if (res == t) return static_cast<int>(start);
+    start += 1;
+  }
+
+  return -1;
+}
+
 }  // stringmanipulation

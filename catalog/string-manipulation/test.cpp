@@ -122,3 +122,34 @@ TEST(JoinTest, IncludesEmptyStrings) {
   auto result = join(input, ',');
   EXPECT_EQ(result, ",b,");
 }
+
+TEST(IndexOfTest, EmptyStrings) {
+  EXPECT_EQ(index_of("", ""), 0);       // convention: empty string found at 0
+  EXPECT_EQ(index_of("abc", ""), 0);    // empty pattern → 0
+  EXPECT_EQ(index_of("", "a"), -1);     // pattern longer than text
+}
+
+TEST(IndexOfTest, SingleCharacter) {
+  EXPECT_EQ(index_of("abc", "a"), 0);
+  EXPECT_EQ(index_of("abc", "b"), 1);
+  EXPECT_EQ(index_of("abc", "c"), 2);
+  EXPECT_EQ(index_of("abc", "z"), -1);
+}
+
+TEST(IndexOfTest, MultipleCharacters) {
+  EXPECT_EQ(index_of("hello", "he"), 0);
+  EXPECT_EQ(index_of("hello", "ell"), 1);
+  EXPECT_EQ(index_of("hello", "llo"), 2);
+  EXPECT_EQ(index_of("hello", "hello"), 0);
+  EXPECT_EQ(index_of("hello", "helloo"), -1);
+}
+
+TEST(IndexOfTest, OverlappingPatterns) {
+  EXPECT_EQ(index_of("aaaaa", "aaa"), 0);   // first occurrence only
+  EXPECT_EQ(index_of("ababab", "bab"), 1);
+}
+
+TEST(IndexOfTest, NotFoundCases) {
+  EXPECT_EQ(index_of("abcdef", "gh"), -1);
+  EXPECT_EQ(index_of("abcdef", "xyz"), -1);
+}
