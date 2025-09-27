@@ -2,9 +2,11 @@
 #define TWOPOINTERS_H
 
 #include <string>
+#include <vector>
 
 namespace twopointers {
 bool palindrome(const std::string& s);
+bool smallerprefixes(std::vector<int> vec);
 }
 
 #endif
