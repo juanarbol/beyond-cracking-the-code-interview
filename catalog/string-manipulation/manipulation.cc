@@ -1,4 +1,5 @@
 #include "manipulation.h"
+#include <execution>
 
 namespace stringmanipulation {
 bool isAlphaNumeric (char ch) {
@@ -28,6 +29,27 @@ std::vector<std::string> split(const std::string& s, char ch) {
 
   // Always push the last token (even if empty)
   res.push_back(s.substr(start));
+
+  return res;
+}
+
+std::string join(const std::vector<std::string>& parts, char ch) {
+  std::string res;
+  if (parts.empty()) return res;
+
+  size_t total_size = 0;
+  for (const auto& s : parts) {
+    total_size += s.size() + 1;
+  }
+
+  res.reserve(total_size - 1); // no delimiter after the last element
+
+  // Append elements
+  for (size_t i = 0; i < parts.size(); i++) {
+    res.append(parts[i]);
+    // Just between elements
+    if (i != parts.size() - 1) res.push_back(ch);
+  }
 
   return res;
 }
