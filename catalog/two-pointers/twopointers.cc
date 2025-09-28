@@ -1,5 +1,6 @@
 #include "twopointers.h"
 #include <cctype>
+#include <cmath>
 
 namespace twopointers {
 bool palindrome(const std::string &s) {
@@ -54,6 +55,7 @@ std::vector<int> arrayintersection(std::vector<int> a, std::vector<int> b) {
   return res_;
 }
 
+// O(n)
 bool palindromesentence(const std::string& s) {
   if (s.empty()) return false;
   size_t l = 0;
@@ -78,5 +80,65 @@ bool palindromesentence(const std::string& s) {
     }
   }
   return true;
+}
+
+// O(2n) ~ O(n)
+bool reversecasematch(const std::string& s) {
+  if (s.empty() || s.size() == 1) return true;
+
+  int l = 0;
+  int r = s.size() - 1;
+
+  while (l < s.size() && r >= 0) {
+    if (!std::islower(s[l])) {
+      l++;
+      continue;
+    }
+    if (!std::isupper(s[r])) {
+      r--;
+      continue;
+    }
+
+    if (s[l] != std::tolower(s[r]))
+      return false;
+
+    l++;
+    r--;
+  }
+  return true;
+}
+
+std::vector<int> mergesortedarrays(const std::vector<int>& a, const std::vector<int>& b) {
+  // input sanitize
+  if (a.empty()) return b;
+  if (b.empty()) return a;
+
+  std::vector<int> res;
+  size_t p1 = 0;
+  size_t p2 = 0;
+
+  while (p1 < a.size() && p2 < b.size()) {
+    if (a[p1] < b[p2]) {
+      res.push_back(a[p1]);
+      p1++;
+    } else {
+      res.push_back(b[p2]);
+      p2++;
+    }
+  }
+
+  /* At this point at least one vector is fully completed */
+
+  while (p1 < a.size()) {
+    res.push_back(a[p1]);
+    p1++;
+  }
+
+  while (p2 < b.size()) {
+    res.push_back(b[p2]);
+    p2++;
+  };
+
+  return res;
 }
 }  // twopointers

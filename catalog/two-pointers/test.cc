@@ -148,3 +148,80 @@ TEST(PalindromeSentenceTest, EdgeCases) {
   EXPECT_TRUE(palindromesentence("Bob wondered, 'Now, Bob?'"));          // single char
   EXPECT_TRUE(palindromesentence("A!"));         // single alpha char with symbol
 }
+
+TEST(ReverseCaseMatchTest, EmptyString) {
+  EXPECT_TRUE(reversecasematch(""));
+}
+
+TEST(ReverseCaseMatchTest, SingleCharacter) {
+  EXPECT_TRUE(reversecasematch("a"));
+  EXPECT_TRUE(reversecasematch("A"));
+}
+
+TEST(ReverseCaseMatchTest, SimplePairs) {
+  EXPECT_TRUE(reversecasematch("aA"));
+  EXPECT_TRUE(reversecasematch("Zz"));
+}
+
+TEST(ReverseCaseMatchTest, LongerMatches) {
+  EXPECT_TRUE(reversecasematch("haDrRAHd"));  // matches by reverse case
+  EXPECT_TRUE(reversecasematch("AbCdDcBa"));  // alternating pattern
+}
+
+TEST(ReverseCaseMatchTest, Mismatches) {
+  EXPECT_FALSE(reversecasematch("Hello"));
+  EXPECT_FALSE(reversecasematch("ABCdef"));   // case mismatch
+}
+
+TEST(ReverseCaseMatchTest, MixedCaseEdge) {
+  EXPECT_TRUE(reversecasematch("AaBbBbAa"));
+  EXPECT_FALSE(reversecasematch("AaBbCcDd"));
+}
+
+TEST(MergeSortedArraysTest, BothEmpty) {
+  std::vector<int> a = {};
+  std::vector<int> b = {};
+  EXPECT_TRUE(mergesortedarrays(a, b).empty());
+}
+
+TEST(MergeSortedArraysTest, FirstEmpty) {
+  std::vector<int> a = {};
+  std::vector<int> b = {1, 2, 3};
+  EXPECT_EQ(mergesortedarrays(a, b), (std::vector<int>{1, 2, 3}));
+}
+
+TEST(MergeSortedArraysTest, SecondEmpty) {
+  std::vector<int> a = {1, 2, 3};
+  std::vector<int> b = {};
+  EXPECT_EQ(mergesortedarrays(a, b), (std::vector<int>{1, 2, 3}));
+}
+
+TEST(MergeSortedArraysTest, SimpleMerge) {
+  std::vector<int> a = {1, 3, 5};
+  std::vector<int> b = {2, 4, 6};
+  EXPECT_EQ(mergesortedarrays(a, b), (std::vector<int>{1, 2, 3, 4, 5, 6}));
+}
+
+TEST(MergeSortedArraysTest, InterleavedMerge) {
+  std::vector<int> a = {1, 4, 7};
+  std::vector<int> b = {2, 3, 8};
+  EXPECT_EQ(mergesortedarrays(a, b), (std::vector<int>{1, 2, 3, 4, 7, 8}));
+}
+
+TEST(MergeSortedArraysTest, WithDuplicates) {
+  std::vector<int> a = {1, 2, 2, 5};
+  std::vector<int> b = {2, 2, 3};
+  EXPECT_EQ(mergesortedarrays(a, b), (std::vector<int>{1, 2, 2, 2, 2, 3, 5}));
+}
+
+TEST(MergeSortedArraysTest, NegativeNumbers) {
+  std::vector<int> a = {-5, -3, -1};
+  std::vector<int> b = {-4, -2, 0};
+  EXPECT_EQ(mergesortedarrays(a, b), (std::vector<int>{-5, -4, -3, -2, -1, 0}));
+}
+
+TEST(MergeSortedArraysTest, UnevenSizes) {
+  std::vector<int> a = {1, 2, 3};
+  std::vector<int> b = {10, 20};
+  EXPECT_EQ(mergesortedarrays(a, b), (std::vector<int>{1, 2, 3, 10, 20}));
+}
