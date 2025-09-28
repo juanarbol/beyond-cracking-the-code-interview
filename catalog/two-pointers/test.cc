@@ -313,3 +313,33 @@ TEST(MergeThreeSortedArraysTest, HandlesMixedSizes) {
   std::vector<int> c = {4, 5, 6, 7};
   EXPECT_EQ(merge3sortedarrays(a, b, c), (std::vector<int>{1, 2, 3, 4, 5, 6, 7}));
 }
+
+TEST(SortValleyArrayTest, BasicValley) {
+  std::vector<int> input = {9, 7, 5, 2, 3, 6, 10};
+  std::vector<int> expected = {2, 3, 5, 6, 7, 9, 10};
+  EXPECT_EQ(sortvalleyshaped(input), expected);
+}
+
+TEST(SortValleyArrayTest, AlreadySorted) {
+  std::vector<int> input = {1, 2, 3, 4, 5};
+  std::vector<int> expected = {1, 2, 3, 4, 5};
+  EXPECT_EQ(sortvalleyshaped(input), expected);
+}
+
+TEST(SortValleyArrayTest, StrictlyDescending) {
+  std::vector<int> input = {5, 4, 3, 2, 1};
+  std::vector<int> expected = {1, 2, 3, 4, 5};
+  EXPECT_EQ(sortvalleyshaped(input), expected);
+}
+
+TEST(SortValleyArrayTest, SingleElement) {
+  std::vector<int> input = {42};
+  std::vector<int> expected = {42};
+  EXPECT_EQ(sortvalleyshaped(input), expected);
+}
+
+TEST(SortValleyArrayTest, EmptyArray) {
+  std::vector<int> input = {};
+  std::vector<int> expected = {};
+  EXPECT_EQ(sortvalleyshaped(input), expected);
+}

@@ -1,4 +1,5 @@
 #include "twopointers.h"
+#include <algorithm>
 #include <cctype>
 #include <cmath>
 
@@ -168,19 +169,56 @@ std::vector<int> merge3sortedarrays(const std::vector<int>& a, const std::vector
   size_t k = 0;
   std::vector<int> res;
 
+  /* Invariant: at least one arr is not finished */
   while (i < a.size() || j < b.size() || k < c.size()) {
     int val = INT_MAX;
 
+    /* Find the min of the three numbers */
     if (i < a.size()) val = std::min(val, a[i]);
     if (j < b.size()) val = std::min(val, b[j]);
     if (k < c.size()) val = std::min(val, c[k]);
 
+    /* Push the minimum value */
     if (res.empty() || res.back() != val) res.push_back(val);
 
+    /* Move the pointer, but only the one referenced */
     if (i < a.size() && a[i] == val) i++;
     if (j < b.size() && b[j] == val) j++;
     if (k < c.size() && c[k] == val) k++;
   }
+
+  return res;
+}
+
+
+std::vector<int> sortvalleyshaped(const std::vector<int>& a) {
+  if (a.empty()) return {};
+
+  // O(n)
+  size_t valleyIndex = std::min_element(a.begin(), a.end()) - a.begin();
+
+  // Left descending, Right ascending
+  std::vector<int> left(a.begin(), a.begin() + valleyIndex);
+  std::vector<int> right(a.begin() + valleyIndex, a.end());
+
+  // Reverse left so it comes ascending
+  // O(n)
+  std::reverse(left.begin(), left.end());
+
+  std::vector<int> res;
+  res.reserve(a.size());
+  size_t i = 0;
+  size_t j = 0;
+  // O(n)
+  while (i < left.size() && j < right.size()) {
+    if (left[i] < right[j]) {
+      res.push_back(left[i++]);
+    } else {
+      res.push_back(right[j++]);
+    }
+  }
+  while (i < left.size()) res.push_back(left[i++]);
+  while (j < right.size()) res.push_back(right[j++]);
 
   return res;
 }

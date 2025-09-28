@@ -15,6 +15,7 @@ bool reversecasematch(const std::string& s);
 std::vector<int> mergesortedarrays(const std::vector<int>& a, const std::vector<int>& b);
 bool twosum(std::vector<int> a);
 std::vector<int> merge3sortedarrays(const std::vector<int>& a, const std::vector<int>& b, const std::vector<int>& c);
+std::vector<int> sortvalleyshaped(const std::vector<int>& a);
 }
 
 #endif
