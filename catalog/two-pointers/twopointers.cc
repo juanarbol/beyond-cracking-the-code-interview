@@ -32,4 +32,24 @@ bool smallerprefixes(std::vector<int> vec) {
   }
   return true;
 }
+
+std::vector<int> arrayintersection(std::vector<int> a, std::vector<int> b) {
+  std::vector<int> res_;
+  size_t p1 = 0;
+  size_t p2 = 0;
+
+  while (p1 < a.size() && p2 < b.size()) {
+    if (a[p1] == b[p2]) {
+      res_.push_back(a[p1]);
+      p1++;
+      p2++;
+    } else if (a[p1] < b[p2]) {
+      p1++;
+    } else {
+      p2++;
+    }
+  }
+
+  return res_;
 }
+}  // twopointers

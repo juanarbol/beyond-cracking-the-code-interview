@@ -7,6 +7,7 @@
 namespace twopointers {
 bool palindrome(const std::string& s);
 bool smallerprefixes(std::vector<int> vec);
+std::vector<int> arrayintersection(std::vector<int> a, std::vector<int> b);
 }
 
 #endif

@@ -75,3 +75,53 @@ TEST(SmallerPrefixesTest, FourElementsInvalid) {
   std::vector<int> v2 = {1, 2, -2, 1, 3, 5};
   EXPECT_FALSE(smallerprefixes(v2));
 }
+
+TEST(ArrayIntersectionTest, BothEmpty) {
+  std::vector<int> a;
+  std::vector<int> b;
+  auto result = arrayintersection(a, b);
+  EXPECT_TRUE(result.empty());
+}
+
+TEST(ArrayIntersectionTest, OneEmpty) {
+  std::vector<int> a = {1, 2, 3};
+  std::vector<int> b;
+  auto result = arrayintersection(a, b);
+  EXPECT_TRUE(result.empty());
+}
+
+TEST(ArrayIntersectionTest, NoIntersection) {
+  std::vector<int> a = {1, 2, 3};
+  std::vector<int> b = {4, 5, 6};
+  auto result = arrayintersection(a, b);
+  EXPECT_TRUE(result.empty());
+}
+
+TEST(ArrayIntersectionTest, FullIntersection) {
+  std::vector<int> a = {1, 2, 3};
+  std::vector<int> b = {1, 2, 3};
+  auto result = arrayintersection(a, b);
+  EXPECT_EQ(result, (std::vector<int>{1, 2, 3}));
+}
+
+TEST(ArrayIntersectionTest, PartialIntersection) {
+  std::vector<int> a = {1, 2, 3, 4, 5};
+  std::vector<int> b = {3, 4, 6, 7};
+  auto result = arrayintersection(a, b);
+  EXPECT_EQ(result, (std::vector<int>{3, 4}));
+}
+
+TEST(ArrayIntersectionTest, DuplicatesInBoth) {
+  std::vector<int> a = {1, 2, 2, 3};
+  std::vector<int> b = {2, 2, 3, 3};
+  auto result = arrayintersection(a, b);
+  // Intersection preserves duplicates (2 appears twice, 3 once)
+  EXPECT_EQ(result, (std::vector<int>{2, 2, 3}));
+}
+
+TEST(ArrayIntersectionTest, DifferentLengths) {
+  std::vector<int> a = {1, 2, 3, 4, 5, 6};
+  std::vector<int> b = {2, 4, 6};
+  auto result = arrayintersection(a, b);
+  EXPECT_EQ(result, (std::vector<int>{2, 4, 6}));
+}
