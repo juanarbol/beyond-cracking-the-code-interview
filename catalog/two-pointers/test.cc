@@ -225,3 +225,43 @@ TEST(MergeSortedArraysTest, UnevenSizes) {
   std::vector<int> b = {10, 20};
   EXPECT_EQ(mergesortedarrays(a, b), (std::vector<int>{1, 2, 3, 10, 20}));
 }
+
+TEST(HasTwoSumZeroTest, BasicCase) {
+  std::vector<int> arr = {-5, -2, -1, 1, 1, 10};
+  EXPECT_TRUE(twosum(arr));  // -1 + 1 = 0
+}
+
+TEST(HasTwoSumZeroTest, NoPairs) {
+  std::vector<int> arr = {-5, -3, 2, 4};
+  EXPECT_FALSE(twosum(arr)); // no pair sums to 0
+}
+
+TEST(HasTwoSumZeroTest, MultiplePairs) {
+  std::vector<int> arr = {-10, -5, -2, 0, 2, 5, 10};
+  EXPECT_TRUE(twosum(arr));  // many pairs, e.g., -5 + 5
+}
+
+TEST(HasTwoSumZeroTest, AllNegatives) {
+  std::vector<int> arr = {-10, -5, -1};
+  EXPECT_FALSE(twosum(arr));
+}
+
+TEST(HasTwoSumZeroTest, AllPositives) {
+  std::vector<int> arr = {1, 2, 5, 10};
+  EXPECT_FALSE(twosum(arr));
+}
+
+TEST(HasTwoSumZeroTest, OnlyZeros) {
+  std::vector<int> arr = {0, 0, 0};
+  EXPECT_TRUE(twosum(arr));  // 0 + 0 = 0
+}
+
+TEST(HasTwoSumZeroTest, SingleElement) {
+  std::vector<int> arr = {0};
+  EXPECT_FALSE(twosum(arr)); // no pair exists
+}
+
+TEST(HasTwoSumZeroTest, EmptyArray) {
+  std::vector<int> arr = {};
+  EXPECT_FALSE(twosum(arr)); // no elements at all
+}

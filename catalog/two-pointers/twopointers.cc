@@ -108,6 +108,7 @@ bool reversecasematch(const std::string& s) {
   return true;
 }
 
+// O(n)
 std::vector<int> mergesortedarrays(const std::vector<int>& a, const std::vector<int>& b) {
   // input sanitize
   if (a.empty()) return b;
@@ -140,5 +141,23 @@ std::vector<int> mergesortedarrays(const std::vector<int>& a, const std::vector<
   };
 
   return res;
+}
+
+// A is sorted
+// O(n) space O(1)
+bool twosum(std::vector<int> a) {
+  if (a.empty()) return false;
+
+  size_t l = 0;
+  size_t r = a.size() - 1;
+
+  while (l < r) {
+    int sum = a[l] + a[r];
+    if (sum == 0) return true;
+    if (sum < 0) l++;  // sum is too small, move forward
+    else r--;
+  }
+
+  return false;
 }
 }  // twopointers
