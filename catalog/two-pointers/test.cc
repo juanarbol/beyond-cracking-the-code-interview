@@ -265,3 +265,51 @@ TEST(HasTwoSumZeroTest, EmptyArray) {
   std::vector<int> arr = {};
   EXPECT_FALSE(twosum(arr)); // no elements at all
 }
+
+TEST(MergeThreeSortedArraysTest, HandlesAllEmpty) {
+  std::vector<int> a, b, c;
+  EXPECT_TRUE(merge3sortedarrays(a, b, c).empty());
+}
+
+TEST(MergeThreeSortedArraysTest, HandlesOneEmpty) {
+  std::vector<int> a = {1, 3, 5};
+  std::vector<int> b;
+  std::vector<int> c = {2, 4, 6};
+  EXPECT_EQ(merge3sortedarrays(a, b, c), (std::vector<int>{1, 2, 3, 4, 5, 6}));
+}
+
+TEST(MergeThreeSortedArraysTest, HandlesNoDuplicates) {
+  std::vector<int> a = {1, 4, 7};
+  std::vector<int> b = {2, 5, 8};
+  std::vector<int> c = {3, 6, 9};
+  EXPECT_EQ(merge3sortedarrays(a, b, c), (std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9}));
+}
+
+TEST(MergeThreeSortedArraysTest, HandlesWithDuplicatesAcrossArrays) {
+  std::vector<int> a = {1, 2, 5};
+  std::vector<int> b = {2, 3, 6};
+  std::vector<int> c = {2, 4, 7};
+  EXPECT_EQ(merge3sortedarrays(a, b, c), (std::vector<int>{1, 2, 3, 4, 5, 6, 7}));
+}
+
+TEST(MergeThreeSortedArraysTest, HandlesAllSameElements) {
+  std::vector<int> a = {1, 1, 1};
+  std::vector<int> b = {1, 1};
+  std::vector<int> c = {1};
+  EXPECT_EQ(merge3sortedarrays(a, b, c), (std::vector<int>{1}));
+}
+
+TEST(MergeThreeSortedArraysTest, HandlesNegativeNumbers) {
+  std::vector<int> a = {-5, -3, -1};
+  std::vector<int> b = {-4, -2, 0};
+  std::vector<int> c = {1, 2, 3};
+  EXPECT_EQ(merge3sortedarrays(a, b, c),
+            (std::vector<int>{-5, -4, -3, -2, -1, 0, 1, 2, 3}));
+}
+
+TEST(MergeThreeSortedArraysTest, HandlesMixedSizes) {
+  std::vector<int> a = {1};
+  std::vector<int> b = {2, 3};
+  std::vector<int> c = {4, 5, 6, 7};
+  EXPECT_EQ(merge3sortedarrays(a, b, c), (std::vector<int>{1, 2, 3, 4, 5, 6, 7}));
+}

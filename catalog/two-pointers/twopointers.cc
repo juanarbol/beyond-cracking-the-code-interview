@@ -160,4 +160,29 @@ bool twosum(std::vector<int> a) {
 
   return false;
 }
+
+// NOTE: NO DUPES
+std::vector<int> merge3sortedarrays(const std::vector<int>& a, const std::vector<int>& b, const std::vector<int>& c) {
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
+  std::vector<int> res;
+
+  while (i < a.size() || j < b.size() || k < c.size()) {
+    int val = INT_MAX;
+
+    if (i < a.size()) val = std::min(val, a[i]);
+    if (j < b.size()) val = std::min(val, b[j]);
+    if (k < c.size()) val = std::min(val, c[k]);
+
+    if (res.empty() || res.back() != val) res.push_back(val);
+
+    if (i < a.size() && a[i] == val) i++;
+    if (j < b.size() && b[j] == val) j++;
+    if (k < c.size() && c[k] == val) k++;
+  }
+
+  return res;
+}
+
 }  // twopointers
