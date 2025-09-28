@@ -1,4 +1,5 @@
 #include "twopointers.h"
+#include <cctype>
 
 namespace twopointers {
 bool palindrome(const std::string &s) {
@@ -51,5 +52,31 @@ std::vector<int> arrayintersection(std::vector<int> a, std::vector<int> b) {
   }
 
   return res_;
+}
+
+bool palindromesentence(const std::string& s) {
+  if (s.empty()) return false;
+  size_t l = 0;
+  size_t r = s.size() - 1;
+
+  while (l < r) {
+    if (!std::isalpha(static_cast<unsigned char>(s[l]))) {
+      l++;
+      continue;
+    }
+    if (!std::isalpha(static_cast<unsigned char>(s[r]))) {
+      r--;
+      continue;
+    }
+
+    if (std::tolower(static_cast<unsigned char>(s[l])) ==
+        std::tolower(static_cast<unsigned char>(s[r]))) {
+      l++;
+      r--;
+    } else {
+      return false;
+    }
+  }
+  return true;
 }
 }  // twopointers

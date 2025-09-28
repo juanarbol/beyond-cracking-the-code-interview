@@ -125,3 +125,26 @@ TEST(ArrayIntersectionTest, DifferentLengths) {
   auto result = arrayintersection(a, b);
   EXPECT_EQ(result, (std::vector<int>{2, 4, 6}));
 }
+
+TEST(PalindromeSentenceTest, SimplePalindromes) {
+  EXPECT_TRUE(palindromesentence("aba"));
+  EXPECT_TRUE(palindromesentence("abba"));
+  EXPECT_TRUE(palindromesentence("Aba"));  // case-insensitive
+}
+
+TEST(PalindromeSentenceTest, WithSpacesAndPunctuation) {
+  EXPECT_TRUE(palindromesentence("A man, a plan, a canal, Panama"));
+  EXPECT_TRUE(palindromesentence("No 'x' in Nixon"));
+}
+
+TEST(PalindromeSentenceTest, NotPalindromes) {
+  EXPECT_FALSE(palindromesentence("hello"));
+  EXPECT_FALSE(palindromesentence("abcd"));
+}
+
+TEST(PalindromeSentenceTest, EdgeCases) {
+  EXPECT_FALSE(palindromesentence(""));          // empty
+  EXPECT_TRUE(palindromesentence("a"));          // single char
+  EXPECT_TRUE(palindromesentence("Bob wondered, 'Now, Bob?'"));          // single char
+  EXPECT_TRUE(palindromesentence("A!"));         // single alpha char with symbol
+}
