@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cctype>
 #include <cmath>
+#include <cstddef>
 
 namespace twopointers {
 bool palindrome(const std::string &s) {
@@ -220,6 +221,27 @@ std::vector<int> sortvalleyshaped(const std::vector<int>& a) {
   while (i < left.size()) res.push_back(left[i++]);
   while (j < right.size()) res.push_back(right[j++]);
 
+  return res;
+}
+
+std::vector<int> missinginrange(const std::vector<int>& a, int low, int hight) {
+  size_t i = 0;
+  int num = low;
+  std::vector<int> res;
+  while (num <= hight) {
+    if (i < a.size() && a[i] < num) {
+      // move pointer
+      i++;
+    } else if (i < a.size() && a[i] == num) {
+      // found skip
+      i++;
+      num++;
+    } else {
+      // not found... in the list
+      res.push_back(num);
+      num++;
+    }
+  }
   return res;
 }
 

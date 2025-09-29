@@ -343,3 +343,44 @@ TEST(SortValleyArrayTest, EmptyArray) {
   std::vector<int> expected = {};
   EXPECT_EQ(sortvalleyshaped(input), expected);
 }
+
+TEST(MissingInRangeTest, EmptyArray) {
+  std::vector<int> arr;
+  EXPECT_EQ(missinginrange(arr, 1, 5), (std::vector<int>{1,2,3,4,5}));
+}
+
+TEST(MissingInRangeTest, FullRangePresent) {
+  std::vector<int> arr = {1, 2, 3, 4, 5};
+  EXPECT_EQ(missinginrange(arr, 1, 5), (std::vector<int>{}));
+}
+
+TEST(MissingInRangeTest, SomeMissingNumbers) {
+  std::vector<int> arr = {1, 3, 5, 7};
+  EXPECT_EQ(missinginrange(arr, 1, 7), (std::vector<int>{2, 4, 6}));
+}
+
+TEST(MissingInRangeTest, MissingAtBeginning) {
+  std::vector<int> arr = {3, 4, 5};
+  EXPECT_EQ(missinginrange(arr, 1, 5), (std::vector<int>{1, 2}));
+}
+
+TEST(MissingInRangeTest, MissingAtEnd) {
+  std::vector<int> arr = {1, 2, 3};
+  EXPECT_EQ(missinginrange(arr, 1, 5), (std::vector<int>{4, 5}));
+}
+
+TEST(MissingInRangeTest, DuplicatesInArray) {
+  const std::vector<int> arr = {1, 2, 2, 3, 5};
+  EXPECT_EQ(missinginrange(arr, 1, 5), (std::vector<int>{4}));
+}
+
+TEST(MissingInRangeTest, RangeOutsideArrayValues) {
+  std::vector<int> arr = {10, 12, 13};
+  EXPECT_EQ(missinginrange(arr, 10, 13), (std::vector<int>{11}));
+}
+
+TEST(MissingInRangeTest, SingleNumberRange) {
+  std::vector<int> arr = {5};
+  EXPECT_EQ(missinginrange(arr, 5, 5), (std::vector<int>{}));
+  EXPECT_EQ(missinginrange(arr, 4, 4), (std::vector<int>{4}));
+}

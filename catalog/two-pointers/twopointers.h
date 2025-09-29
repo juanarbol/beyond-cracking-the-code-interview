@@ -16,6 +16,7 @@ std::vector<int> mergesortedarrays(const std::vector<int>& a, const std::vector<
 bool twosum(std::vector<int> a);
 std::vector<int> merge3sortedarrays(const std::vector<int>& a, const std::vector<int>& b, const std::vector<int>& c);
 std::vector<int> sortvalleyshaped(const std::vector<int>& a);
+std::vector<int> missinginrange(const std::vector<int>& a, int low, int hight);
 }
 
 #endif
