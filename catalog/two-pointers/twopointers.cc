@@ -164,6 +164,7 @@ bool twosum(std::vector<int> a) {
 }
 
 // NOTE: NO DUPES
+// NOTE: WE HAVE TO RE DO THIS WITH ACTUAL POINTERS INSTEAD OF C++ HELPERS
 std::vector<int> merge3sortedarrays(const std::vector<int>& a, const std::vector<int>& b, const std::vector<int>& c) {
   size_t i = 0;
   size_t j = 0;
@@ -192,38 +193,35 @@ std::vector<int> merge3sortedarrays(const std::vector<int>& a, const std::vector
 }
 
 
+// O(n)
 std::vector<int> sortvalleyshaped(const std::vector<int>& a) {
   if (a.empty()) return {};
 
-  // O(n)
-  size_t valleyIndex = std::min_element(a.begin(), a.end()) - a.begin();
+  std::vector<int> res(a.size());
 
-  // Left descending, Right ascending
-  std::vector<int> left(a.begin(), a.begin() + valleyIndex);
-  std::vector<int> right(a.begin() + valleyIndex, a.end());
+  size_t l = 0;
+  size_t r = a.size() - 1;
+  size_t i = a.size() - 1;
 
-  // Reverse left so it comes ascending
   // O(n)
-  std::reverse(left.begin(), left.end());
-
-  std::vector<int> res;
-  res.reserve(a.size());
-  size_t i = 0;
-  size_t j = 0;
-  // O(n)
-  while (i < left.size() && j < right.size()) {
-    if (left[i] < right[j]) {
-      res.push_back(left[i++]);
+  // Pretty much put in place, sort using the valley property
+  while (l < r) {
+    if (a[l] > a[r]) {
+      res[i] = a[l];
+      l++;
     } else {
-      res.push_back(right[j++]);
+      res[i] = a[r];
+      r--;
     }
+    i--;
   }
-  while (i < left.size()) res.push_back(left[i++]);
-  while (j < right.size()) res.push_back(right[j++]);
+
+  res[0] = a[l];
 
   return res;
 }
 
+// O(n) worst case
 std::vector<int> missinginrange(const std::vector<int>& a, int low, int hight) {
   size_t i = 0;
   int num = low;
